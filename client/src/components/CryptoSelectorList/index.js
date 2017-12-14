@@ -17,7 +17,10 @@ const CryptoSelectorList = (props) => {
         {props.cryptoSelectorList.map((entry) => {
           return (
             <CryptoSelectorEntry
-              cryptoEntry={entry}
+              key={entry.id}
+              id={entry.id}
+              cryptoEntry={entry.name}
+              handleSelectorToggle={props.handleSelectorToggle}
             />
           )
         })}

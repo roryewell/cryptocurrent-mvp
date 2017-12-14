@@ -13,6 +13,7 @@ const CryptoSelectorEntry = (props) => {
         <input
           name={props.cryptoEntry}
           type="checkbox"
+          onChange={(event) => props.handleSelectorToggle(event, props.id)}
         />
         {props.cryptoEntry}
       </label>

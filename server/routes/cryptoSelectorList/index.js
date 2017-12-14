@@ -8,10 +8,14 @@ router.get('/', (req, res) => {
     .find()
     .limit(10)
     .sort({ rank: 1 })
-    .select({ id: 1 })
+    .select({ id: 1, name: 1})
     .then((docs) => {
       res.send(docs);
     })
+    .catch((err) => {
+      res.sendStatus(404);
+      console.log(err);
+    });
 })
 
 module.exports = router;
