@@ -1,6 +1,10 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
+const Promise = require('bluebird');
+const mongoose = require('mongoose');
+mongoose.Promise = Promise;
+mongoose.connect('mongodb://localhost/cryptos');
 const cryptoSelectorList = require('./routes/cryptoSelectorList/index.js');
 
 app.use(express.static(__dirname + '/../client/dist'));
