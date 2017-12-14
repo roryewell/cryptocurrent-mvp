@@ -10,7 +10,7 @@ class App extends React.Component {
     super(props);
     this.state = {
       cryptoSelectorList: [],
-      dashboardList: []
+      dashboardCryptoList: []
     }
   }
   componentDidMount() {
@@ -34,7 +34,7 @@ class App extends React.Component {
     axios.get(`http://localhost:5123/crypto/${cryptoId}`)
       .then((response) => {
         this.setState({
-          dashboardList: [...this.state.dashboardList, response.data[0]]
+          dashboardCryptoList: [...this.state.dashboardCryptoList, response.data[0]]
         });
       })
       .catch((err) => {
@@ -46,7 +46,7 @@ class App extends React.Component {
       this.getCryptoEntryDetail(key);
     } else {
       this.setState({
-        dashboardList: this.state.dashboardList.filter((crypto) => {
+        dashboardCryptoList: this.state.dashboardCryptoList.filter((crypto) => {
           return crypto.id !== key;
         })
       });
@@ -60,7 +60,7 @@ class App extends React.Component {
           handleSelectorToggle={this.handleSelectorToggle.bind(this)}
         />
         <DashboardCryptoList
-
+          dashboardCryptoList={this.state.dashboardCryptoList}
         />
       </div>
     );

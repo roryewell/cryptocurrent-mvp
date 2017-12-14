@@ -23,6 +23,3 @@ const CryptoSelectorEntry = (props) => {
 };
 
 export default CryptoSelectorEntry;
-
-            // checked={this.state.isGoing}
-            // onChange={this.handleInputChange}

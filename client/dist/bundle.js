@@ -18285,7 +18285,7 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
     super(props);
     this.state = {
       cryptoSelectorList: [],
-      dashboardList: []
+      dashboardCryptoList: []
     };
   }
   componentDidMount() {
@@ -18306,7 +18306,7 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
   getCryptoEntryDetail(cryptoId) {
     __WEBPACK_IMPORTED_MODULE_4_axios___default.a.get(`http://localhost:5123/crypto/${cryptoId}`).then(response => {
       this.setState({
-        dashboardList: [...this.state.dashboardList, response.data[0]]
+        dashboardCryptoList: [...this.state.dashboardCryptoList, response.data[0]]
       });
     }).catch(err => {
       console.log('Error fetching crypto details: ', err);
@@ -18317,7 +18317,7 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
       this.getCryptoEntryDetail(key);
     } else {
       this.setState({
-        dashboardList: this.state.dashboardList.filter(crypto => {
+        dashboardCryptoList: this.state.dashboardCryptoList.filter(crypto => {
           return crypto.id !== key;
         })
       });
@@ -18331,7 +18331,9 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
         cryptoSelectorList: this.state.cryptoSelectorList,
         handleSelectorToggle: this.handleSelectorToggle.bind(this)
       }),
-      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__DashboardCryptoList_index_js__["a" /* default */], null)
+      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__DashboardCryptoList_index_js__["a" /* default */], {
+        dashboardCryptoList: this.state.dashboardCryptoList
+      })
     );
   }
 }
@@ -18418,9 +18420,6 @@ const CryptoSelectorEntry = props => {
 
 /* harmony default export */ __webpack_exports__["a"] = (CryptoSelectorEntry);
 
-// checked={this.state.isGoing}
-// onChange={this.handleInputChange}
-
 /***/ }),
 /* 30 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -18430,6 +18429,8 @@ const CryptoSelectorEntry = props => {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__DashboardCryptoEntry_index_js__ = __webpack_require__(61);
+
 
 
 
@@ -18445,7 +18446,16 @@ const DashboardCyrptoList = props => {
   return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
     'div',
     { style: divStyle },
-    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('ul', null)
+    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+      'ul',
+      null,
+      props.dashboardCryptoList.map(entry => {
+        return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__DashboardCryptoEntry_index_js__["a" /* default */], {
+          key: entry.id,
+          cryptoDetails: entry
+        });
+      })
+    )
   );
 };
 
@@ -25927,6 +25937,28 @@ exports.clearImmediate = clearImmediate;
 }(typeof self === "undefined" ? typeof global === "undefined" ? this : global : self));
 
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(57), __webpack_require__(0)))
+
+/***/ }),
+/* 61 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
+
+
+
+const DashboardCryptoEntry = props => {
+  return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+    'li',
+    null,
+    props.cryptoDetails.name
+  );
+};
+
+/* harmony default export */ __webpack_exports__["a"] = (DashboardCryptoEntry);
 
 /***/ })
 /******/ ]);
