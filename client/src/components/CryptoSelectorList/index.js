@@ -6,8 +6,7 @@ const divStyle = {
   width: '30%',
   float: 'left',
   height: '100%',
-  backgroundColor: 'red',
-  color: 'white'
+  paddingTop: '30px'
 };
 
 const CryptoSelectorList = (props) => {

@@ -3,26 +3,22 @@ import { render } from 'react-dom';
 import DashboardCryptoEntry from '../DashboardCryptoEntry/index.js';
 
 const divStyle = {
-  width: '70%',
+  width: '40%',
   float: 'left',
-  height: '100%',
-  backgroundColor: 'green',
-  color: 'white'
+  height: '100%'
 };
 
 const DashboardCyrptoList = (props) => {
   return (
     <div style={divStyle}>
-      <ul>
-        {props.dashboardCryptoList.map((entry) => {
-          return (
-            <DashboardCryptoEntry
-              key={entry.id}
-              cryptoDetails={entry}
-            />
-          )
-        })}
-      </ul>
+      {props.dashboardCryptoList.map((entry) => {
+        return (
+          <DashboardCryptoEntry
+            key={entry.id}
+            cryptoDetails={entry}
+          />
+        )
+      })}
     </div>
   );
 };

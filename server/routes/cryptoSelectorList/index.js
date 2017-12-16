@@ -6,7 +6,7 @@ const Crypto = require('../../models/Crypto/index.js');
 router.get('/', (req, res) => {
   Crypto
     .find()
-    .limit(10)
+    .limit(15)
     .sort({ rank: 1 })
     .select({ id: 1, name: 1})
     .then((docs) => {

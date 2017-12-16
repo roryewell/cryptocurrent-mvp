@@ -34,7 +34,7 @@ class App extends React.Component {
     axios.get(`http://localhost:5123/crypto/${cryptoId}`)
       .then((response) => {
         this.setState({
-          dashboardCryptoList: [...this.state.dashboardCryptoList, response.data[0]]
+          dashboardCryptoList: [...this.state.dashboardCryptoList, response.data[0]].sort((a, b) => a.rank - b.rank)
         });
       })
       .catch((err) => {

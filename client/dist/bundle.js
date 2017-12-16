@@ -18306,7 +18306,7 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
   getCryptoEntryDetail(cryptoId) {
     __WEBPACK_IMPORTED_MODULE_4_axios___default.a.get(`http://localhost:5123/crypto/${cryptoId}`).then(response => {
       this.setState({
-        dashboardCryptoList: [...this.state.dashboardCryptoList, response.data[0]]
+        dashboardCryptoList: [...this.state.dashboardCryptoList, response.data[0]].sort((a, b) => a.rank - b.rank)
       });
     }).catch(err => {
       console.log('Error fetching crypto details: ', err);
@@ -18358,8 +18358,7 @@ const divStyle = {
   width: '30%',
   float: 'left',
   height: '100%',
-  backgroundColor: 'red',
-  color: 'white'
+  paddingTop: '30px'
 };
 
 const CryptoSelectorList = props => {
@@ -18397,7 +18396,9 @@ const CryptoSelectorList = props => {
 
 const labelStyle = {
   display: 'block',
-  paddingLeft: '30%'
+  paddingLeft: '25%',
+  color: '#b4bac1',
+  marginRight: '200px'
 };
 
 const CryptoSelectorEntry = props => {
@@ -18435,27 +18436,21 @@ const CryptoSelectorEntry = props => {
 
 
 const divStyle = {
-  width: '70%',
+  width: '40%',
   float: 'left',
-  height: '100%',
-  backgroundColor: 'green',
-  color: 'white'
+  height: '100%'
 };
 
 const DashboardCyrptoList = props => {
   return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
     'div',
     { style: divStyle },
-    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-      'ul',
-      null,
-      props.dashboardCryptoList.map(entry => {
-        return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__DashboardCryptoEntry_index_js__["a" /* default */], {
-          key: entry.id,
-          cryptoDetails: entry
-        });
-      })
-    )
+    props.dashboardCryptoList.map(entry => {
+      return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__DashboardCryptoEntry_index_js__["a" /* default */], {
+        key: entry.id,
+        cryptoDetails: entry
+      });
+    })
   );
 };
 
@@ -25950,11 +25945,82 @@ exports.clearImmediate = clearImmediate;
 
 
 
+const boxStyle = {
+  width: '60%',
+  margin: '10px auto 20px auto',
+  backgroundColor: 'white',
+  boxShadow: '0 4px 8px 0 rgba(0,0,0,0.2)',
+  transition: '0.3s',
+  borderRadius: '5px',
+  paddingBottom: '20px'
+};
+
+const titleStyle = {
+  display: 'inline-block',
+  paddingLeft: '10px'
+};
+
+const rowStyle = {
+  paddingLeft: '10px'
+};
+
 const DashboardCryptoEntry = props => {
   return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-    'li',
-    null,
-    props.cryptoDetails.name
+    'div',
+    { style: boxStyle },
+    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+      'div',
+      { style: titleStyle },
+      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        'h2',
+        null,
+        `${props.cryptoDetails.name} (${props.cryptoDetails.symbol})`
+      )
+    ),
+    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+      'div',
+      { style: rowStyle },
+      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        'strong',
+        null,
+        'Rank:'
+      ),
+      ' ',
+      props.cryptoDetails.rank
+    ),
+    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+      'div',
+      { style: rowStyle },
+      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        'strong',
+        null,
+        'Price (USD):'
+      ),
+      ' ',
+      '$' + props.cryptoDetails.price_usd.toFixed(2).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,")
+    ),
+    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+      'div',
+      { style: rowStyle },
+      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        'strong',
+        null,
+        'Market Cap (USD):'
+      ),
+      ' ',
+      '$' + props.cryptoDetails.market_cap_usd.toFixed(0).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,")
+    ),
+    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+      'div',
+      { style: rowStyle },
+      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        'strong',
+        null,
+        'Change (24h):'
+      ),
+      ' ',
+      props.cryptoDetails.percent_change_24h + '%'
+    )
   );
 };
 

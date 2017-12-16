@@ -1,0 +1,11 @@
+body {
+  background-color: #3f484f;
+}
+
+.mainBanner {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  padding-bottom: 100px;
+  border-botttom: 1px solid white;
+}
