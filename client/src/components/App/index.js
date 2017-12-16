@@ -2,6 +2,7 @@ import React from 'react';
 import { render } from 'react-dom';
 import CryptoSelectorList from '../CryptoSelectorList/index.js';
 import DashboardCryptoList from '../DashboardCryptoList/index.js';
+import CryptoGlobalStats from '../CryptoGlobalStats/index.js';
 import axios from 'axios';
 import Promise from 'bluebird';
 
@@ -10,11 +11,13 @@ class App extends React.Component {
     super(props);
     this.state = {
       cryptoSelectorList: [],
-      dashboardCryptoList: []
+      dashboardCryptoList: [],
+      cryptoGlobalStats: {}
     }
   }
   componentDidMount() {
     this.getCryptoSelectorList();
+    this.getCryptoGlobalStats();
   }
   getCryptoSelectorList() {
     axios.get('http://localhost:5123/crypto-selector-list')
@@ -46,6 +49,17 @@ class App extends React.Component {
         console.log('Error fetching crypto details: ', err);
       });
   }
+  getCryptoGlobalStats() {
+    axios.get('http://localhost:5123/crypto-global-stats')
+      .then((response) => {
+        this.setState({
+          cryptoGlobalStats: response.data[0]
+        });
+      })
+      .catch((err) => {
+        console.log('Error fetching crypto global stats: ', err);
+      });
+  }
   handleSelectorToggle(event, key) {
     if (event.target.checked) {
       this.getCryptoEntryDetail(key);
@@ -66,6 +80,9 @@ class App extends React.Component {
         />
         <DashboardCryptoList
           dashboardCryptoList={this.state.dashboardCryptoList}
+        />
+        <CryptoGlobalStats
+          cryptoGlobalStats={this.state.cryptoGlobalStats}
         />
       </div>
     );

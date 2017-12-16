@@ -3,9 +3,8 @@ import { render } from 'react-dom';
 
 const labelStyle = {
   display: 'block',
-  paddingLeft: '25%',
-  color: '#b4bac1',
-  marginRight: '200px'
+  paddingLeft: '45%',
+  color: '#b4bac1'
 };
 
 const CryptoSelectorEntry = (props) => {

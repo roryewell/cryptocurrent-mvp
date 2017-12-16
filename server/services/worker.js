@@ -28,12 +28,8 @@ helpers.getCyrptoStats()
 helpers.getGlobalCryptoStats()
   .then((results) => {
     const parsedResults = JSON.parse(results);
-    console.log(parsedResults);
     const globalStatsRecord = new GlobalStats(parsedResults);
     return globalStatsRecord.save();
-  })
-  .then((doc) => {
-    console.log('Successfully retrieved global stats');
   })
   .catch((err) => {
     console.log(err);
