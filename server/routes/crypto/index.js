@@ -1,6 +1,5 @@
 const express = require('express');
 const router = express.Router();
-const bodyParser = require('body-parser');
 const Crypto = require('../../models/Crypto/index.js');
 
 router.get('/:cryptoId', (req, res) => {

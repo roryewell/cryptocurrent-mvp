@@ -1,15 +1,15 @@
 const express = require('express');
 const router = express.Router();
-const Crypto = require('../../models/Crypto/index.js');
+const GlobalStats = require('../../models/GlobalStats/index.js');
 
 router.get('/', (req, res) => {
-  Crypto
+  GlobalStats
     .find()
-    .limit(15)
-    .sort({ rank: 1 })
-    .select({ id: 1, name: 1})
-    .then((docs) => {
-      res.send(docs);
+    .limit(1)
+    .sort({ last_updated: -1 })
+    .select({ total_market_cap_usd: 1, active_currencies: 1} )
+    .then((doc) => {
+      res.send(doc);
     })
     .catch((err) => {
       res.sendStatus(404);
