@@ -18305,6 +18305,11 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
   }
   getCryptoEntryDetail(cryptoId) {
     __WEBPACK_IMPORTED_MODULE_4_axios___default.a.get(`http://localhost:5123/crypto/${cryptoId}`).then(response => {
+      if (response.data[0].percent_change_24h >= 0) {
+        response.data[0].statusColor = '#32CD32';
+      } else {
+        response.data[0].statusColor = 'red';
+      }
       this.setState({
         dashboardCryptoList: [...this.state.dashboardCryptoList, response.data[0]].sort((a, b) => a.rank - b.rank)
       });
@@ -26012,7 +26017,7 @@ const DashboardCryptoEntry = props => {
     ),
     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
       'div',
-      { style: rowStyle },
+      { style: Object.assign({}, rowStyle, { backgroundColor: props.cryptoDetails.statusColor }) },
       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
         'strong',
         null,

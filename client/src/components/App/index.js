@@ -33,6 +33,11 @@ class App extends React.Component {
   getCryptoEntryDetail(cryptoId) {
     axios.get(`http://localhost:5123/crypto/${cryptoId}`)
       .then((response) => {
+        if (response.data[0].percent_change_24h >= 0) {
+          response.data[0].statusColor = '#32CD32';
+        } else {
+          response.data[0].statusColor = 'red';
+        }
         this.setState({
           dashboardCryptoList: [...this.state.dashboardCryptoList, response.data[0]].sort((a, b) => a.rank - b.rank)
         });

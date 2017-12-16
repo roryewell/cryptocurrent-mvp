@@ -35,7 +35,7 @@ const DashboardCryptoEntry = (props) => {
       <div style={rowStyle}>
         <strong>Market Cap (USD):</strong> {'$' + props.cryptoDetails.market_cap_usd.toFixed(0).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,")}
       </div>
-      <div style={rowStyle}>
+      <div style={Object.assign({}, rowStyle, { backgroundColor: props.cryptoDetails.statusColor })}>
         <strong>Change (24h):</strong> {props.cryptoDetails.percent_change_24h + '%'}
       </div>
     </div>
